@@ -1,0 +1,366 @@
+@use "sass:math";
+
+// VARIABLES
+
+$userfont: 'Jost', sans-serif;
+
+$textcolor-pink-hover: #E5CED2;
+$textcolor-pink2-hover: #ce8d98;
+
+$textcolor-gradient1: linear-gradient(92.55deg, #570010 0%, #333333 97.65%); 
+$textcolor-gradient2: linear-gradient(146.43deg, #CBC0F1 21.4%, #FFFFFF 72.11%); 
+
+$textcolor-dark: #333333; 
+$textcolor-light: #FFFFFF; 
+$textcolor-gray: #666666;
+$textcolor-light-gray1: #F0F0F0;
+$textcolor-light-gray2: #999999;
+$textcolor-small: #888888; 
+
+$background-pink: linear-gradient(270.03deg, #E5CED2 0%, #F6EAEE 100%); 
+$background-gray: #F8F8F8;  
+$background-dark: #000000; 
+$background-light: #FFFFFF; 
+
+$background-button-red: linear-gradient(99.31deg, #570010 -7.04%, #252525 87.72%);
+$background-button-black: #000000;
+
+$background-block-gray: #F5F3F9;
+$background-block-blue: #EEF5FF;
+$background-block-puprle: #EBE3F8;
+
+$accent: #0084FF;
+$background-bullet-active: #C3324E;
+$background-discount: #FFF500;
+
+$background-star: #E8EEF0;
+$background-star2: #CACACA;
+$background-star-active: #FFE03F;
+
+$background-checkbox-pink: linear-gradient(180deg, #EDD0F7 0%, #C4A5CF 100%);
+$background-checkbox-blue: linear-gradient(180deg, #C2E3FF 0%, #558DD1 100%);
+
+$background-page-gray: #F9F9F9;
+
+$container_padding: 80px 135px;
+$container_padding-mob: 30px 5.3333% 40px;
+
+$radius: 12px;
+
+$transition: 0.3s ease;
+
+// FUNCTIONS
+
+@function rem($px) {
+	$result: math.div($px, 16) + rem;
+	@return $result;
+}
+
+@function em($px) {
+	$result: math.div($px, 16) + em;
+	@return $result;
+}
+
+// MIXIN 
+
+@mixin font($sz: rem(16),
+			$lh: 140%, 
+			$wt: 400, 
+			$stl: normal) {
+	font-size: $sz;
+	line-height: $lh;
+	font-weight: $wt;
+	font-style: $stl;
+}
+
+@mixin flex ($dir: row,
+             $jc: center,
+             $ai: center) {
+    display: flex;
+    flex-direction: $dir;
+    justify-content: $jc;
+    align-items: $ai;
+}
+
+@mixin line {
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: rgba(0, 0, 0, 0.3);
+        opacity: 0.2;
+    }
+}
+
+// GENERAL CSS SETTINGS
+
+html {
+	scroll-behavior: smooth;
+}
+
+.page {
+	position: relative;
+	font-family: $userfont;
+	@include font ($sz: 16px);
+	color: $textcolor-dark;
+	min-width: 320px;
+	height: 100%;
+	overflow-x: hidden;
+
+	&_active-burger {
+		overflow: hidden;
+	}
+
+	&_active-cart {
+		overflow: hidden;
+	}
+
+	&_active-search {
+		overflow: hidden;
+	}
+
+	&_active-form {
+		overflow: hidden;
+	}
+
+	&_active-successful {
+		overflow: hidden;
+	}
+
+	&_active-image {
+		overflow: hidden;
+	}
+
+	&__cover {
+		display: none;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		background: #000000;
+		opacity: 0.4;
+		z-index: 1;
+
+		&_open-menu {
+			display: block;
+		}
+
+		&_open-search {
+			display: block;
+			z-index: 11;
+		}
+
+		&_open-cart {
+			display: block;
+			z-index: 11;
+		}
+
+		&_open-form {
+			display: block;
+			z-index: 11;
+		}
+
+		&_open-successful {
+			display: block;
+			z-index: 11;
+		}
+
+		&_open-image {
+			display: block;
+			z-index: 11;
+		}
+	}
+}
+
+.wrapper {
+	min-height: 100vh;
+	height: auto;
+	width: 100%;
+	@include flex ($dir: column, $jc: space-between, $ai: stretch);
+	position: relative;
+	overflow-x: hidden;
+}
+
+.container {
+    max-width: calc(1440px - (135px * 2));
+	padding: $container_padding;
+    margin: 0 auto;
+
+	@media (max-width: 992px) {
+		padding: $container_padding-mob;
+	}
+}
+
+.main {
+	margin-top: 152px;
+
+	@media (max-width: 768px) {
+		margin-top: 105px;
+	}
+}
+
+.title-h1,
+.title-h2 {
+	@include font($sz: Min(Max(32px,5vw),42px), $lh: 110%, $wt: 500);
+	text-align: center;
+}
+
+.title-h3 {
+	@include font($sz: Min(Max(24px,5vw),32px), $lh: 120%, $wt: 500);
+	margin-bottom: Min(Max(15px,2.5vw),40px);
+}
+
+.title-h4 {
+	@include font($sz: rem(24), $lh: 120%, $wt: 500);
+}
+
+.subtitle {
+	@include font($sz: Min(Max(14px,3.5vw),18px), $lh: 140%, $wt: 500);
+	margin-bottom: Min(Max(10px,2.5vw),20px);
+}
+
+.text {
+	@include font($sz: Min(Max(12px,2.5vw),18px), $lh: 140%, $wt: 400);
+}
+
+.btn {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	@include font($sz: rem(12), $lh: 20px, $wt: 500);
+	letter-spacing: 0.1em;
+	color: $textcolor-light;
+	text-align: center;
+	text-transform: uppercase;
+	border-radius: 28px;
+	cursor: pointer;
+	box-sizing: border-box;
+
+	&_red {
+		padding: 10px 30px;
+		background: $background-button-red;
+		transition: filter $transition, box-shadow $transition;
+
+		&:hover {
+			filter: hue-rotate(-75deg);
+			box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.4);
+		}
+	}
+
+	&_transparent {
+		padding: 10px 30px;
+		background: none;
+		border: 1px solid $background-light;
+		transition: background $transition, color $transition;
+
+		&:hover {
+			background: $background-light;
+			color: $textcolor-dark;
+		}
+	}
+
+	&_black {
+		padding: 15px 30px;
+		background: $background-button-black;
+		transition: background $transition, color $transition;
+
+		&:hover {
+			color: $textcolor-dark;
+			background: $textcolor-pink-hover;
+		}
+	}
+
+	&_white{
+		padding: 15px 30px;
+		color: $textcolor-dark;
+		background: $background-light;
+		transition: background $transition, color $transition;
+
+		&:hover {
+			color: $textcolor-light;
+			background: $background-dark;
+		}
+	}
+}
+
+.modal {
+	position: fixed;
+	left: 50%;
+	top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 15;
+    background: $background-light;
+	width: 0;
+	height: 0;
+	overflow: auto;
+	transition: all $transition;
+
+	&_open-cart {
+		width: 820px;
+        height: 548px;
+    }
+
+	&_open-form {
+		width: 820px;
+        height: 620px;
+    }
+
+	&_open-successful {
+		width: 820px;
+        height: 397px;
+    }
+
+	&_open-image {
+		width: 820px;
+        height: 620px;
+		padding: 80px 40px 40px;
+    }
+
+	&__close {
+        position: absolute;
+        top: 40px;
+        right: 40px;
+		width: 20px;
+		height: 20px;
+        cursor: pointer;
+        transition: filter $transition;
+
+        &:hover {
+            filter: invert(0.5);
+        }
+    }
+}
+
+@media (max-width: 992px) {
+	.modal {
+		&_open-cart,
+		&_open-form,
+		&_open-successful {
+			width: 100vw;
+			height: 100%;
+		}
+
+		&_open-image {
+			@include flex;
+			width: calc(100vw - 40px * 2);
+			height: calc(100% - 80px - 40px);
+		}
+	}
+}
+
+@media (max-width: 599px) {
+	.modal {
+		&_open-image {
+			width: calc(100vw - 20px * 2);
+			padding: 80px 20px 40px;
+		}
+
+		&__close {
+			right: 20px;
+		}
+	}
+}

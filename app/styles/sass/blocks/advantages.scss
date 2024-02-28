@@ -1,0 +1,28 @@
+.advantages {
+    position: relative;
+
+    @include line;
+
+    &__container {
+        padding: 43px 135px
+    }
+
+    &__list {
+        display: grid;
+        grid-template-columns: 337px 232px 1fr;
+        grid-template-rows: 1fr;
+        gap: 143px;
+    }
+
+    &__item {
+        @include flex($jc: flex-start);
+        gap: 30px;
+
+        &:nth-child(3) {
+            margin-left: 38px;
+            margin-right: 20px;
+        }
+    }
+}
+
+@import '_media-advantages';
